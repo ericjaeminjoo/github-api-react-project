@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import TabsBar from './components/TabsBar';
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Assistant:400,700&display=swap');
+
   // minimal CSS reset
   *,
   *:before,
@@ -9,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  font-family: 'Assistant', sans-serif;
   }
 
   html {
@@ -18,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
 
   body {
   font-size: 1.6rem;
+  max-width: 1440px;
+  }
+
+  li {
+    list-style: none;
   }
 `;
 
@@ -26,7 +35,7 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle />
-        <div>Hello, World...again!</div>;
+        <TabsBar />
       </Fragment>
     );
   }
