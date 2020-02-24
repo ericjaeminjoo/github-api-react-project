@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TabsBar from './components/TabsBar';
+import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Assistant:400,700&display=swap');
@@ -29,13 +30,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.div`
+  max-width: 1150px;
+  margin: 0 auto;
+`;
+
 class App extends Component {
   render() {
     return (
-      <Fragment>
+      <Container>
         <GlobalStyle />
         <TabsBar />
-      </Fragment>
+      </Container>
     );
   }
 }
