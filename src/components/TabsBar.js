@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 
 const List = styled.ul`
   display: flex;
   justify-content: center;
+  align-items: center;
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 50px;
 `;
 
@@ -17,13 +18,41 @@ const Button = styled.button`
   font-weight: 700;
   margin: 0 10px;
   color: inherit;
+  outline: 0;
+  border: none;
 
-  &:active,
-  &:focus {
-    outline: 0;
-    border: none;
+  &:hover {
+    cursor: pointer;
   }
 `;
+
+function LanguageBar({ selectedTab, onTabSelect }) {
+  const languageTabs = [
+    'All',
+    'JavaScript',
+    'Python',
+    'Ruby',
+    'Java',
+    'PHP',
+    'TypeScript',
+    'CSS'
+  ];
+
+  return (
+    <List>
+      {languageTabs.map((language) => (
+        <li key={language}>
+          <Button
+            onClick={() => onTabSelect(language)}
+            style={language === selectedTab ? { color: '#916dd5' } : null}
+          >
+            {language}
+          </Button>
+        </li>
+      ))}
+    </List>
+  );
+}
 
 class TabsBar extends Component {
   constructor(props) {
@@ -39,34 +68,13 @@ class TabsBar extends Component {
   };
 
   render() {
-    const languageTabs = [
-      'All',
-      'JavaScript',
-      'Python',
-      'Ruby',
-      'Java',
-      'PHP',
-      'TypeScript',
-      'CSS'
-    ];
-
     return (
-      <List>
-        {languageTabs.map((language) => (
-          <li key={language}>
-            <Button
-              onClick={() => this.tabSelectHandler(language)}
-              style={
-                language === this.state.selectedTab
-                  ? { color: '#916dd5' }
-                  : null
-              }
-            >
-              {language}
-            </Button>
-          </li>
-        ))}
-      </List>
+      <Fragment>
+        <LanguageBar
+          selectedTab={this.state.selectedTab}
+          onTabSelect={this.tabSelectHandler}
+        />
+      </Fragment>
     );
   }
 }
