@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import fetchGitHubRepos from '../api/api';
 import { MdStar } from 'react-icons/md';
+import Fetching from './Fetching';
 
 const List = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
-  padding: 50px;
+  padding: 40px 0 15px 0;
+  li {
+    margin: 8px 0;
+  }
 `;
 
 const Button = styled.button`
@@ -153,7 +157,7 @@ GibHubReposCards.propType = {
   gitHubRepos: PropTypes.array.isRequired
 };
 
-class TabsBar extends Component {
+class GitHubReposSection extends Component {
   constructor(props) {
     super(props);
 
@@ -210,7 +214,7 @@ class TabsBar extends Component {
           selectedTab={selectedTab}
           onTabSelect={this.tabSelectHandler}
         />
-        {this.loadingGitHubRepos() && <p>LOADING PAGE</p>}
+        {this.loadingGitHubRepos() && <Fetching />}
         {error && <p>{error}</p>}
         {gitHubRepos[selectedTab] && (
           <GibHubReposCards gitHubRepos={gitHubRepos[selectedTab]} />
@@ -220,4 +224,4 @@ class TabsBar extends Component {
   }
 }
 
-export default TabsBar;
+export default GitHubReposSection;
