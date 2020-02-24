@@ -15,13 +15,31 @@ const Button = styled.button`
   font-size: 1.8rem;
   text-decoration: none;
   font-weight: 700;
-  color: inherit;
   margin: 0 10px;
+  color: inherit;
+
+  &:active,
+  &:focus {
+    outline: 0;
+    border: none;
+  }
 `;
 
 class TabsBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedTab: 'All'
+    };
+  }
+
+  tabSelectHandler = (tab) => {
+    this.setState({ selectedTab: tab });
+  };
+
   render() {
-    const popularLanguages = [
+    const languageTabs = [
       'All',
       'JavaScript',
       'Python',
@@ -34,9 +52,18 @@ class TabsBar extends Component {
 
     return (
       <List>
-        {popularLanguages.map((language) => (
+        {languageTabs.map((language) => (
           <li key={language}>
-            <Button>{language}</Button>
+            <Button
+              onClick={() => this.tabSelectHandler(language)}
+              style={
+                language === this.state.selectedTab
+                  ? { color: '#916dd5' }
+                  : null
+              }
+            >
+              {language}
+            </Button>
           </li>
         ))}
       </List>

@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
 
   body {
   font-size: 1.6rem;
-  max-width: 1440px;
   }
 
   li {
