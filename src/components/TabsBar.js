@@ -67,40 +67,46 @@ class TabsBar extends Component {
 
     this.state = {
       selectedTab: 'All',
-      gitHubRepos: null,
+      gitHubRepos: {},
       error: null
     };
   }
 
   componentDidMount() {
-    this.tabSelectHandler(this.state.selectedLanguage);
+    this.tabSelectHandler(this.state.selectedTab);
   }
 
   tabSelectHandler = (tab) => {
     this.setState({
       selectedTab: tab,
-      gitHubRepos: null,
       error: null
     });
-    fetchGitHubRepos(tab)
-      .then((gitHubRepos) =>
-        this.setState({
-          gitHubRepos: gitHubRepos,
-          error: null
+
+    if (!this.state.gitHubRepos[tab]) {
+      fetchGitHubRepos(tab)
+        .then((data) => {
+          this.setState({
+            gitHubRepos: {
+              ...this.state.gitHubRepos,
+              [tab]: data
+            }
+          });
         })
-      )
-      .catch((error) => {
-        console.log(
-          `Error lifted from attempt on fetching GitHub Repositories - ${error}`
-        );
-        this.setState({
-          error: 'Error lifted from attempt on fetching GitHub Repositories!'
+        .catch((error) => {
+          console.log(
+            `Error lifted from attempt on fetching GitHub Repositories - ${error}`
+          );
+          this.setState({
+            error: 'Error lifted from attempt on fetching GitHub Repositories!'
+          });
         });
-      });
+    }
   };
 
   loadingGitHubRepos = () => {
-    return this.state.error === null && this.state.gitHubRepos === null;
+    const { selectedTab, gitHubRepos, error } = this.state;
+
+    return !gitHubRepos[selectedTab] && error === null;
   };
 
   render() {
@@ -114,7 +120,9 @@ class TabsBar extends Component {
         />
         {this.loadingGitHubRepos() && <p>LOADING PAGE</p>}
         {error && <p>{error}</p>}
-        {gitHubRepos && <pre>{JSON.stringify(gitHubRepos, null, 2)}</pre>}
+        {gitHubRepos[selectedTab] && (
+          <pre>{JSON.stringify(gitHubRepos[selectedTab], null, 2)}</pre>
+        )}
       </Fragment>
     );
   }
