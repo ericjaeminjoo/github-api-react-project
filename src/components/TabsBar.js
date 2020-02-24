@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import fetchGitHubRepos from '../api/api';
 
 const List = styled.ul`
   display: flex;
@@ -65,21 +66,55 @@ class TabsBar extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 'All'
+      selectedTab: 'All',
+      gitHubRepos: null,
+      error: null
     };
   }
 
+  componentDidMount() {
+    this.tabSelectHandler(this.state.selectedLanguage);
+  }
+
   tabSelectHandler = (tab) => {
-    this.setState({ selectedTab: tab });
+    this.setState({
+      selectedTab: tab,
+      gitHubRepos: null,
+      error: null
+    });
+    fetchGitHubRepos(tab)
+      .then((gitHubRepos) =>
+        this.setState({
+          gitHubRepos: gitHubRepos,
+          error: null
+        })
+      )
+      .catch((error) => {
+        console.log(
+          `Error lifted from attempt on fetching GitHub Repositories - ${error}`
+        );
+        this.setState({
+          error: 'Error lifted from attempt on fetching GitHub Repositories!'
+        });
+      });
+  };
+
+  loadingGitHubRepos = () => {
+    return this.state.error === null && this.state.gitHubRepos === null;
   };
 
   render() {
+    const { selectedTab, error, gitHubRepos } = this.state;
+
     return (
       <Fragment>
         <LanguageBar
-          selectedTab={this.state.selectedTab}
+          selectedTab={selectedTab}
           onTabSelect={this.tabSelectHandler}
         />
+        {this.loadingGitHubRepos() && <p>LOADING PAGE</p>}
+        {error && <p>{error}</p>}
+        {gitHubRepos && <pre>{JSON.stringify(gitHubRepos, null, 2)}</pre>}
       </Fragment>
     );
   }
