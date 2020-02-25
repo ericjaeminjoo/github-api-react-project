@@ -4,13 +4,13 @@
 </p>
 </div>
 
-**github-battle-react-project** is a small React application that uses the Fetch API to get real-time data on the most starred repositories hosted on GitHub using their [GitHub API V3](https://developer.github.com/v3/).
+**github-api-react-project** is a small React application that uses the Fetch API to get real-time data on the most starred repositories hosted on GitHub using their [GitHub API V3](https://developer.github.com/v3/).
 
 I wanted to practice my React skills using React.js library by building this application and use an API to both fetch and render data dynamically.
 
 This modern web application was initially set up using [create-react-app](https://create-react-app.dev/).
 
-A live demo can be found here.
+A live demo can be found @ [github-api-react-project](https://github-api-react-project.netlify.com/).
 
 ## Screenshot
 

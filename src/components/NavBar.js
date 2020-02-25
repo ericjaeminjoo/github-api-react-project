@@ -11,7 +11,7 @@ const NavBarContainer = styled.nav`
     letter-spacing: 0.04rem;
     color: #916dd5;
   }
-  ul a {
+  a {
     text-decoration: none;
     color: #916dd5;
   }
@@ -21,7 +21,9 @@ const NavBar = () => {
   return (
     <NavBarContainer>
       <ul>
-        <li>github-api-react-project</li>
+        <li>
+          <a href=".">github-api-react-project</a>
+        </li>
         <li>
           <a href="https://www.ericjaeminjoo.com" target="_blank">
             learn more
