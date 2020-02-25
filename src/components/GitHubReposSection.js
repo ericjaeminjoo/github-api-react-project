@@ -37,6 +37,7 @@ const RepoCardsContainer = styled.ul`
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 0 auto;
+  max-width: 1150px;
 
   .card {
     margin: 13px 0;
@@ -134,7 +135,7 @@ const GibHubReposCards = ({ gitHubRepos }) => {
             <img
               className="cardImage"
               src={avatar_url}
-              alt={`${login}'s avatar photo`}
+              alt={`${login}'s avatar`}
             ></img>
             <h2 className="cardRepoName">
               <a href={html_url}>{name}</a>

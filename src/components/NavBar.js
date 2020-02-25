@@ -38,7 +38,11 @@ const NavBar = () => {
           </a>
         </li>
         <li>
-          <a href="https://www.ericjaeminjoo.com" target="_blank">
+          <a
+            href="https://www.ericjaeminjoo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             learn more
           </a>
         </li>
