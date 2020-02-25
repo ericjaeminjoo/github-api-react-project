@@ -4,9 +4,9 @@
 </p>
 </div>
 
-**github-api-react-project** is a small React application that uses the Fetch API to get real-time data on the most starred repositories hosted on GitHub using their [GitHub API V3](https://developer.github.com/v3/).
+**github-api-react-project** is a visually pleasing arrangement of popular GitHub repositories that, based on the selected language tab, will update cards dynamically using live data that is fetched from GitHub using their [GitHub API V3](https://developer.github.com/v3/).
 
-I wanted to practice my React skills using React.js library by building this application and use an API to both fetch and render data dynamically.
+I wanted to practice using React, styling with Styled Components, and Flexbox layout knowledge by building this application and use an API to both fetch and render data dynamically.
 
 This modern web application was initially set up using [create-react-app](https://create-react-app.dev/).
 
@@ -23,10 +23,11 @@ A live demo can be found @ [github-api-react-project](https://github-api-react-p
 In the project directory, you can run:
 
 ```
+npm install
 yarn start
 ```
 
-This command starts the app in the development mode.
+These commands will install package dependencies and starts the app in the development mode.
 
 Open http://localhost:3000 to view it in the browser.
 
