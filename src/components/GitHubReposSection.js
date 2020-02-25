@@ -37,7 +37,6 @@ const RepoCardsContainer = styled.ul`
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 0 auto;
-  max-width: 1150px;
 
   .card {
     margin: 13px 0;
