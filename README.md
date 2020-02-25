@@ -15,7 +15,7 @@ A live demo can be found @ [github-api-react-project](https://github-api-react-p
 ## Screenshot
 
 <div align="center">
-  <img src="./screenshot.png"/>
+  <img src="./github-api-react-project.png"/>
 </div>
 
 ## Usage
