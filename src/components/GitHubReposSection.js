@@ -158,15 +158,11 @@ GibHubReposCards.propType = {
 };
 
 class GitHubReposSection extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedTab: 'All',
-      gitHubRepos: {},
-      error: null
-    };
-  }
+  state = {
+    selectedTab: 'All',
+    gitHubRepos: {},
+    error: null
+  };
 
   componentDidMount() {
     this.tabSelectHandler(this.state.selectedTab);

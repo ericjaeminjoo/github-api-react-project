@@ -12,12 +12,9 @@ const override = css`
 `;
 
 class Fetching extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true
-    };
-  }
+  state = {
+    loading: true
+  };
 
   render() {
     return (
