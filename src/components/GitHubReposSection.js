@@ -157,67 +157,54 @@ GibHubReposCards.propType = {
   gitHubRepos: PropTypes.array.isRequired
 };
 
-class GitHubReposSection extends Component {
-  state = {
-    selectedTab: 'All',
-    gitHubRepos: {},
-    error: null
-  };
-
-  componentDidMount() {
-    this.tabSelectHandler(this.state.selectedTab);
-  }
-
-  tabSelectHandler = (tab) => {
-    this.setState({
-      selectedTab: tab,
+const selectedTabReducer = (state, action) => {
+  if (action.type === 'Successful') {
+    return {
+      ...state,
+      [action.selectedTab]: action.data,
       error: null
-    });
-
-    if (!this.state.gitHubRepos[tab]) {
-      fetchGitHubRepos(tab)
-        .then((data) => {
-          this.setState({
-            gitHubRepos: {
-              ...this.state.gitHubRepos,
-              [tab]: data
-            }
-          });
-        })
-        .catch((error) => {
-          console.log(
-            `Error lifted from attempt on fetching GitHub Repositories - ${error}`
-          );
-          this.setState({
-            error: 'Error lifted from attempt on fetching GitHub Repositories!'
-          });
-        });
-    }
-  };
-
-  loadingGitHubRepos = () => {
-    const { selectedTab, gitHubRepos, error } = this.state;
-
-    return !gitHubRepos[selectedTab] && error === null;
-  };
-
-  render() {
-    const { selectedTab, error, gitHubRepos } = this.state;
-
-    return (
-      <Fragment>
-        <LanguageBar
-          selectedTab={selectedTab}
-          onTabSelect={this.tabSelectHandler}
-        />
-        {this.loadingGitHubRepos() && <Fetching />}
-        {error && <p>{error}</p>}
-        {gitHubRepos[selectedTab] && (
-          <GibHubReposCards gitHubRepos={gitHubRepos[selectedTab]} />
-        )}
-      </Fragment>
-    );
+    };
+  } else if (action.type === 'Error') {
+    return {
+      ...state,
+      error: action.error.message
+    };
+  } else {
+    throw new Error('Action is not supported.');
   }
-}
+};
+
+const GitHubReposSection = () => {
+  const [selectedTab, setSelectedTab] = React.useState('All');
+  const [state, dispatch] = React.useReducer(selectedTabReducer, {
+    error: null
+  });
+
+  const fetchedGitHubRepos = React.useRef([]);
+
+  React.useEffect(() => {
+    if (fetchedGitHubRepos.current.includes(selectedTab) === false) {
+      fetchedGitHubRepos.current.push(selectedTab);
+      fetchGitHubRepos(selectedTab)
+        .then((data) => {
+          dispatch({ type: 'Successful', selectedTab, data });
+        })
+        .catch((error) => dispatch({ type: 'Error', error }));
+    }
+  }, [fetchedGitHubRepos, selectedTab]);
+
+  const loadingGitHubRepos = () => !state[selectedTab] && state.error === null;
+
+  return (
+    <Fragment>
+      <LanguageBar selectedTab={selectedTab} onTabSelect={setSelectedTab} />
+      {loadingGitHubRepos() && <Fetching />}
+      {state.error && <p>{state.error}</p>}
+      {state[selectedTab] && (
+        <GibHubReposCards gitHubRepos={state[selectedTab]} />
+      )}
+    </Fragment>
+  );
+};
 
 export default GitHubReposSection;
