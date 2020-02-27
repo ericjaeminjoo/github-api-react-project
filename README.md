@@ -6,9 +6,9 @@
 
 **github-api-react-project** is a visual arrangement of popular GitHub repositories that, based on the selected language tab, will update cards dynamically using live data that is fetched from GitHub using their [GitHub API V3](https://developer.github.com/v3/).
 
-I wanted to practice using React, styling with Styled Components, and Flexbox layout knowledge by building this application and use an API to both fetch and render data dynamically.
+I wanted to improve my abilities with React, styling with Styled Components, and Flexbox layout knowledge by building this application and use an API to both fetch and render data dynamically.
 
-After learning about React Hooks, I went ahead and refactored my code to use them right away!
+Later on, I went ahead and refactored my code to incorporate the use of React Hooks.
 
 This modern web application was initially set up using [create-react-app](https://create-react-app.dev/).
 
